@@ -353,7 +353,7 @@ deb https://enterprise.proxmox.com/debian/pve trixie pve-enterprise
 
 ## 📝 Changelog
 
-### v1.0.0 (2024-01-XX)
+### v1.0.0 (10.12.2025)
 - Initial release
 - Automatic network detection
 - Bridge configuration with interface enslavement
