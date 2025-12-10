@@ -51,21 +51,21 @@ This script makes **significant changes** to your system:
 ### 1. Download the Script
 
 ```bash
-wget https://raw.githubusercontent.com/yourusername/debian-to-proxmox/main/debian-to-proxmox.sh
+wget https://raw.githubusercontent.com/MrMasterbay/proxmox-from-scratch/main/little-goblin.sh
 # or
-curl -O https://raw.githubusercontent.com/yourusername/debian-to-proxmox/main/debian-to-proxmox.sh
+curl -O https://raw.githubusercontent.com/MrMasterbay/proxmox-from-scratch/main/little-goblin.sh
 ```
 
 ### 2. Make it Executable
 
 ```bash
-chmod +x debian-to-proxmox.sh
+chmod +x little-goblin.sh
 ```
 
 ### 3. Run as Root
 
 ```bash
-sudo ./debian-to-proxmox.sh
+sudo ./little-goblin.sh
 ```
 
 ### 4. Follow the Prompts
