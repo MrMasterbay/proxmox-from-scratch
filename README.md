@@ -132,7 +132,7 @@ vmbr0: 192.168.1.100/24 (bridge with eth0 as slave)
 ### Example Session
 
 ```bash
-root@debian:~# ./debian-to-proxmox.sh
+root@debian:~# ./little-goblin.sh
 
 [STEP] Checking Debian version...
 [INFO] Debian 13 (Trixie) detected
