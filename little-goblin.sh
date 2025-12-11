@@ -166,7 +166,6 @@ apt-get install -y \
     ca-certificates \
     curl \
     wget \
-    software-properties-common \
     ifupdown2 \
     bridge-utils
 
@@ -177,20 +176,17 @@ print_step "Adding Proxmox VE repository..."
 curl -fsSL https://enterprise.proxmox.com/debian/proxmox-release-trixie.gpg \
     -o /etc/apt/trusted.gpg.d/proxmox-release-trixie.gpg
 
-# Add Proxmox repository
-cat > /etc/apt/sources.list.d/pve-install-repo.list <<EOF
-# Proxmox VE Repository (No-Subscription)
+# Add Proxmox in your Sources.list
+cat > /etc/apt/sources.list <<EOF
+# Debian Trixie Repositories
+deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware
 deb http://download.proxmox.com/debian/pve trixie pve-no-subscription
 EOF
 
 print_warn "NOTE: Using the No-Subscription repository."
 print_warn "For production environments, a subscription is recommended!"
-
-# Optional: Enterprise repository (commented out)
-cat > /etc/apt/sources.list.d/pve-enterprise.list <<EOF
-# Proxmox VE Enterprise Repository (requires subscription)
-# deb https://enterprise.proxmox.com/debian/pve trixie pve-enterprise
-EOF
 
 # Update system again
 print_step "Updating package lists..."
@@ -304,13 +300,6 @@ read -p "Remove Debian kernel and keep only Proxmox kernel? (yes/no): " remove_k
 if [[ $remove_kernel == "yes" ]]; then
     print_step "Removing Debian kernel..."
     apt-get remove -y linux-image-amd64 'linux-image-6.1*' || true
-    update-grub
-fi
-
-# Disable Enterprise repository (if no subscription present)
-print_step "Disabling Enterprise repository..."
-if [[ -f /etc/apt/sources.list.d/pve-enterprise.list ]]; then
-    sed -i 's/^deb/#deb/g' /etc/apt/sources.list.d/pve-enterprise.list
 fi
 
 # Check LVM thin provisioning
