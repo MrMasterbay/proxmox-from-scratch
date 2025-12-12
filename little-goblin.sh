@@ -24,6 +24,26 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+# Show support message
+show_support_message() {
+    # Don't show banner if we're in a SSH session (remote execution)
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ "$TERM" = "dumb" ] || [ "$SHOW_BANNER" = "false" ]; then
+        return
+    fi
+    
+    echo "============================================================================"
+    echo "  Debian 13 to Proxmox VE Converter Script"
+    echo "  Made by Nico Schmidt (baGStube_Nico)"
+    echo ""
+    echo "  Features: Uninstalls Debian 13 Kernel and installs the PVE Kernel"
+    echo ""
+    echo "  Please consider supporting this script development:"
+    echo "  💖 Ko-fi: ko-fi.com/bagstube_nico"
+    echo "  🔗 Links: linktr.ee/bagstube_nico"
+    echo "============================================================================"
+    echo ""
+}
+
 # Check Debian version
 print_step "Checking Debian version..."
 if ! grep -q "trixie\|13" /etc/debian_version 2>/dev/null && ! grep -q "trixie" /etc/os-release 2>/dev/null; then
@@ -33,6 +53,9 @@ if ! grep -q "trixie\|13" /etc/debian_version 2>/dev/null && ! grep -q "trixie" 
         exit 1
     fi
 fi
+
+# Show the Support message
+show_support_message
 
 # Check hostname
 print_step "Checking hostname configuration..."
